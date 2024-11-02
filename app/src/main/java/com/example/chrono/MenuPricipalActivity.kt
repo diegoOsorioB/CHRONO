@@ -38,7 +38,6 @@ class MenuPricipalActivity : AppCompatActivity() {
             val intent = Intent(this, FormActivity::class.java)
             intent.putExtra("id", id)
             startActivity(intent)
-            Toast.makeText(this, "$id", Toast.LENGTH_SHORT).show()
         }
 
         // Evento click para Segunda Revisión

@@ -57,9 +57,10 @@ class MainActivity : AppCompatActivity() {
 
                         } else {
                             val contra = response.getString("contra")
-                            val user = response.getString("usuario")
+                            val user = response.getString("usuario").trim()
                             val id = response.getString("id_usuario")
                             val rol = response.getString("rol")
+
                             if (contra == password && user == username) {
                                 if (rol == "G") {
                                     val intent =
