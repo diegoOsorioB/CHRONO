@@ -1,0 +1,113 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".FormActivity">
+
+
+    <EditText
+        android:id="@+id/economicoEditText1"
+        android:layout_width="299dp"
+        android:layout_height="39dp"
+        android:layout_marginTop="52dp"
+        android:hint="Ingrese económico"
+        android:textColorHint="@color/gold"
+        android:inputType="number"
+        android:maxLength="11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.426"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buscarButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="8dp"
+        android:text="Buscar"
+        app:layout_constraintEnd_toStartOf="@id/eliminarButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/economicoEditText1"
+        app:layout_constraintWidth_percent="0.4" />
+
+    <Button
+        android:id="@+id/eliminarButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:text="Eliminar"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/buscarButton"
+        app:layout_constraintTop_toBottomOf="@+id/economicoEditText1"
+        app:layout_constraintWidth_percent="0.4" />
+
+    <EditText
+        android:id="@+id/economicoEditText2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:hint="Ingrese económico"
+        android:inputType="number"
+        android:maxLength="11"
+        android:textColorHint="@color/gold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buscarButton"
+        app:layout_constraintWidth_percent="0.8" />
+
+    <EditText
+        android:id="@+id/placasEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:hint="Ingrese placas"
+        android:textColorHint="@color/gold"
+        android:inputType="text"
+        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/economicoEditText2"
+        app:layout_constraintWidth_percent="0.8" />
+
+    <Spinner
+        android:id="@+id/estatusSpinner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:entries="@array/estatus_options"
+        app:layout_constraintTop_toBottomOf="@+id/placasEditText"
+        app:layout_constraintWidth_percent="0.8"
+        tools:layout_editor_absoluteX="41dp"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/guardarButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Guardar"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/cancelarButton"
+        app:layout_constraintTop_toBottomOf="@id/estatusSpinner"
+        app:layout_constraintWidth_percent="0.4"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp" />
+
+    <Button
+        android:id="@+id/cancelarButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Cancelar"
+        android:textColor="#FFFFFF"
+        app:layout_constraintStart_toEndOf="@id/guardarButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/estatusSpinner"
+        app:layout_constraintWidth_percent="0.4"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="8dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Chrono</string>
+    <string-array name="estatus_options">
+        <item>Activo</item>
+        <item>Inactivo</item>
+    </string-array>
+
+    <!-- Opciones para el Spinner de Rol -->
+    <string-array name="rol_options">
+        <item>Guardia</item>
+        <item>Supervisor</item>
+        <item>Admin</item>
+    </string-array>
+</resources>

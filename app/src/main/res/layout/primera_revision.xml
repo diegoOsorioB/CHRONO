@@ -1,0 +1,164 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/primera"
+    android:layout_height="match_parent"
+    tools:context=".FormActivity">
+
+    <!-- Campo de texto Economico -->
+
+    <!-- Campo de texto Placas -->
+
+    <TextView
+        android:id="@+id/economicoLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
+        android:text="Economico"
+        android:textColor="#C4A484"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.064"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/economicoEditText"
+        android:layout_width="187dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="80dp"
+        android:inputType="number"
+        android:maxLength="11"
+        app:layout_constraintStart_toEndOf="@id/economicoLabel"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.6" />
+
+    <TextView
+        android:id="@+id/placasLabel"
+        android:layout_width="96dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="60dp"
+        android:text="Placas"
+        android:textColor="#C4A484"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/economicoLabel" />
+
+    <!-- Campo de texto Tarimas -->
+
+    <!-- Campo de texto Patín -->
+
+    <EditText
+        android:id="@+id/placasEditText"
+        android:layout_width="187dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="16dp"
+        android:inputType="text"
+        app:layout_constraintStart_toEndOf="@id/placasLabel"
+        app:layout_constraintTop_toBottomOf="@+id/economicoEditText"
+        app:layout_constraintWidth_percent="0.6" />
+
+    <TextView
+        android:id="@+id/tarimasLabel"
+        android:layout_width="99dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="60dp"
+        android:text="Tarimas"
+        android:textColor="#C4A484"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/placasLabel" />
+
+    <!-- Campo de texto Operador -->
+
+    <!-- Campo de texto Gasolina -->
+
+    <EditText
+        android:id="@+id/tarimasEditText"
+        android:layout_width="187dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="12dp"
+        android:inputType="text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toEndOf="@id/tarimasLabel"
+        app:layout_constraintTop_toBottomOf="@+id/placasEditText"
+        app:layout_constraintWidth_percent="0.6" />
+
+    <TextView
+        android:id="@+id/patinLabel"
+        android:layout_width="105dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="32dp"
+        android:text="patín"
+        android:textColor="#C4A484"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tarimasLabel" />
+
+    <EditText
+        android:id="@+id/patinEditText"
+        android:layout_width="187dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="20dp"
+        android:inputType="text"
+        app:layout_constraintStart_toEndOf="@id/patinLabel"
+        app:layout_constraintTop_toBottomOf="@+id/tarimasEditText"
+        app:layout_constraintWidth_percent="0.6" />
+
+    <TextView
+        android:id="@+id/operadorLabel"
+        android:layout_width="105dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="24dp"
+        android:text="Operador"
+        android:textColor="#C4A484"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/patinLabel" />
+
+    <!-- Botón Guardar -->
+
+    <!-- Botón Cancelar -->
+
+    <EditText
+        android:id="@+id/operadorEditText"
+        android:layout_width="187dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="12dp"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@id/operadorLabel"
+        app:layout_constraintTop_toBottomOf="@+id/patinEditText"
+        app:layout_constraintWidth_percent="0.8" />
+
+    <Button
+        android:id="@+id/guardarButton"
+        android:layout_width="158dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="140dp"
+        android:layout_marginEnd="16dp"
+        android:text="Guardar"
+        app:layout_constraintEnd_toStartOf="@+id/cancelarButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/operadorLabel" />
+
+    <Button
+        android:id="@+id/cancelarButton"
+        android:layout_width="141dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="140dp"
+        android:text="Cancelar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/guardarButton"
+        app:layout_constraintTop_toBottomOf="@+id/operadorEditText" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,135 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:id="@+id/modificarRevision"
+    tools:context=".MainActivity">
+
+    <!-- Campo de Económico con botón Buscar -->
+
+    <!-- Económico -->
+
+    <!-- Placas -->
+
+    <EditText
+        android:id="@+id/etBuscarEconomico"
+        android:layout_width="319dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:hint="Economico"
+        android:inputType="number"
+        android:maxLength="11"
+        android:textColorHint="@color/gold"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnBuscar"
+        android:layout_width="316dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:text="Buscar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etBuscarEconomico" />
+
+    <!-- Tarimas -->
+
+    <!-- Patin -->
+    <EditText
+        android:id="@+id/etTarimas"
+        android:layout_width="316dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:hint="Tarimas"
+        android:textColorHint="@color/gold"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnBuscar" />
+
+    <EditText
+        android:id="@+id/etPatin"
+        android:layout_width="316dp"
+        android:layout_height="wrap_content"
+        android:hint="Patin"
+        android:textColorHint="@color/gold"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etTarimas" />
+
+    <!-- Operador -->
+    <EditText
+        android:id="@+id/etOperador"
+        android:layout_width="316dp"
+        android:layout_height="wrap_content"
+        android:hint="Operador"
+        android:inputType="number"
+        android:maxLength="11"
+        android:textColorHint="@color/gold"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etPatin" />
+
+    <!-- Kilometraje -->
+    <EditText
+        android:id="@+id/etKilometraje"
+        android:layout_width="316dp"
+        android:layout_height="wrap_content"
+        android:hint="Kilometraje"
+        android:textColorHint="@color/gold"
+        android:textSize="18sp"
+        android:inputType="number"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etOperador" />
+
+    <!-- Número de Cincho -->
+    <EditText
+        android:id="@+id/etNoCincho"
+        android:layout_width="316dp"
+        android:layout_height="wrap_content"
+        android:hint="No. Cincho"
+        android:textColorHint="@color/gold"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etKilometraje" />
+
+    <!-- Botón Modificar -->
+
+    <!-- Botón Cancelar -->
+
+    <Button
+        android:id="@+id/btnModificar"
+        android:layout_width="316dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="72dp"
+        android:text="Modificar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etNoCincho" />
+
+    <Button
+        android:id="@+id/btnCancelar"
+        android:layout_width="316dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="12dp"
+        android:text="Cancelar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnModificar" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

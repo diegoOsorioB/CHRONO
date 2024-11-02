@@ -1,0 +1,159 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BusquedaActivity">
+
+    <!-- Label Economico -->
+
+    <!-- Campo de texto para Economico -->
+
+    <TextView
+        android:id="@+id/economicoLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="44dp"
+        android:text="Economico"
+        android:textColor="#C4A484"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/economicoEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        app:layout_constraintStart_toEndOf="@id/economicoLabel"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        app:layout_constraintWidth_percent="0.6"
+        app:layout_constraintTop_toTopOf="@id/economicoLabel" />
+
+    <!-- Spinner o dropdown -->
+
+
+    <!-- Botón Buscar -->
+
+
+    <EditText
+        android:id="@+id/economicoDateEditText"
+        android:layout_width="165dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="32dp"
+        android:clickable="true"
+        android:focusable="false"
+        android:hint="Seleccionar fecha"
+        app:layout_constraintEnd_toStartOf="@+id/economicoDateEditText2"
+        app:layout_constraintHorizontal_bias="0.301"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/economicoLabel" />
+
+    <EditText
+        android:id="@+id/economicoDateEditText2"
+        android:layout_width="186dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="16dp"
+        android:clickable="true"
+        android:focusable="false"
+        android:hint="Seleccionar fecha"
+        app:layout_constraintEnd_toEndOf="@id/economicoEditText"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@id/economicoEditText"
+        app:layout_constraintTop_toBottomOf="@id/economicoEditText" />
+
+    <Button
+        android:id="@+id/buscarButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Buscar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/economicoDateEditText" />
+
+    <!-- ListView para mostrar los resultados de la consulta -->
+
+
+    <!-- Botón Generar Excel -->
+
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.437"
+        tools:ignore="MissingConstraints">
+
+        <TableLayout
+            android:id="@+id/resultTableLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#F5F5F5"
+            android:padding="16dp"
+            android:stretchColumns="1"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/buscarButton"
+            app:layout_constraintVertical_bias="0.091"
+            tools:ignore="MissingConstraints">
+
+            <!-- Aquí puedes definir encabezados de la tabla si es necesario -->
+            <TableRow>
+
+                <TextView
+                    android:padding="8dp"
+                    android:text="Revision"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="1dp"
+                    android:padding="8dp"
+                    android:text="Economico"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:padding="8dp"
+                    android:text="Operador"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:padding="8dp"
+                    android:text="Detalles"
+                    android:textStyle="bold" />
+
+            </TableRow>
+        </TableLayout>
+
+    </HorizontalScrollView>
+
+    <Button
+        android:id="@+id/generarExcelButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Generar Excel"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="32dp" />
+
+    <!-- Botón Volver -->
+    <Button
+        android:id="@+id/volverButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Volver"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="32dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

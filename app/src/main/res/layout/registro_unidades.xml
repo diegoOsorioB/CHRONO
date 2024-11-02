@@ -1,0 +1,84 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/registroUni"
+    android:padding="16dp"
+    tools:context=".RegistroUnidadesActivity">
+
+    <!-- Campo Económico -->
+
+    <!-- Campo Placas -->
+    <EditText
+        android:id="@+id/etEconomico"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
+        android:hint="Economico"
+        android:textColorHint="@color/gold"
+        android:textSize="18sp"
+        android:inputType="number"
+        android:maxLength="11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Estatus (Spinner) -->
+
+    <EditText
+        android:id="@+id/etPlacas"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:hint="Placas"
+        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        android:textColorHint="@color/gold"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etEconomico" />
+
+    <!-- Botón Guardar -->
+
+    <Spinner
+        android:id="@+id/spEstatus"
+        android:layout_width="377dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="52dp"
+        android:entries="@array/estatus_options"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etPlacas" />
+
+    <!-- Botón Cancelar -->
+
+    <Button
+        android:id="@+id/btnGuardar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:text="Guardar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/spEstatus" />
+
+    <Button
+        android:id="@+id/btnCancelar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="Cancelar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnGuardar"
+        app:layout_constraintVertical_bias="0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
