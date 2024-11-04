@@ -155,8 +155,42 @@ class ModificaOperadorActivity : AppCompatActivity() {
 
 
         btnEliminar.setOnClickListener {
-            // Logic for deleting the user
-            Toast.makeText(this, "Eliminar clicked", Toast.LENGTH_SHORT).show()
+            val noOperador = editNoOperador.text.toString()
+
+
+            if (noOperador.isEmpty() ) {
+                Toast.makeText(this, "Por favor, complete todos los campos", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+            val queue = Volley.newRequestQueue(this)
+            val url = "http://${conexion.ip}/basechrono/consultaOperador.php"
+            var postRequest = object : StringRequest(
+                Method.POST, url,
+                Response.Listener<String> { response ->
+                    try {
+                        val jsonResponse = JSONObject(response)
+
+                        if (jsonResponse.has("mensaje")) {
+                            val mensaje = jsonResponse.getString("mensaje")
+
+                            Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
+                        }
+
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                        Toast.makeText(this, "Error al recibir la respuesta", Toast.LENGTH_LONG).show()
+                    }
+                }, Response.ErrorListener
+                { error ->
+                    Toast.makeText(this, "Ocurrio un error inesperado", Toast.LENGTH_LONG).show()
+                }){
+                override fun getParams(): MutableMap<String, String> {
+                    val params = HashMap<String, String>()
+                    params.put("no_operador", noOperador)
+                    return params
+                }
+            }
+            queue.add(postRequest)
         }
     }
 }

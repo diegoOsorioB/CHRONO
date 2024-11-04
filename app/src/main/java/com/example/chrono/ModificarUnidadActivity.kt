@@ -124,8 +124,37 @@ class ModificarUnidadActivity : AppCompatActivity() {
         }
 
         btnEliminar.setOnClickListener {
-            // Logic for deleting the vehicle
-            Toast.makeText(this, "Eliminar clicked", Toast.LENGTH_SHORT).show()
+            val economico = editEconomico.text.toString()
+            val placas = editEconomico.text.toString()
+            var estatus = spinnerEstatus.selectedItem.toString()
+
+            if (estatus == "Activo") {
+                estatus = "A"
+            } else {
+                estatus = "I"
+            }
+            if (economico.isEmpty() || placas.isEmpty()) {
+                Toast.makeText(this, "Por favor, complete todos los campos", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
+            val queue = Volley.newRequestQueue(this)
+            val url = "http://${conexion.ip}/basechrono/borrarUnidad.php"
+            var postRequest = object : StringRequest(
+                Method.POST, url,
+                Response.Listener<String> { response ->
+                    Toast.makeText(this, "$response", Toast.LENGTH_LONG).show()
+                }, Response.ErrorListener
+                { error ->
+                    Toast.makeText(this, "Ocurrio un error inesperado", Toast.LENGTH_LONG).show()
+                }){
+                override fun getParams(): MutableMap<String, String> {
+                    val params = HashMap<String, String>()
+                    params.put("economico", economico)
+                    return params
+                }
+            }
+            queue.add(postRequest)
         }
     }
 }

@@ -52,6 +52,7 @@ class BusquedaActivity : AppCompatActivity() {
         resultTableLayout = findViewById(R.id.resultTableLayout)
         generarExcelButton = findViewById(R.id.generarExcelButton)
         volverButton = findViewById(R.id.volverButton)
+        val operadorEditText = findViewById<EditText>(R.id.operadorEditText)
 
         val dateEditText = findViewById<EditText>(R.id.economicoDateEditText)
         val dateEditText2 = findViewById<EditText>(R.id.economicoDateEditText2)
@@ -93,11 +94,10 @@ class BusquedaActivity : AppCompatActivity() {
         buscarButton.setOnClickListener {
             val selectedDate = findViewById<EditText>(R.id.economicoDateEditText).text.toString()
             val economico = economicoEditText.text.toString()
+             val operadorEditText = findViewById<EditText>(R.id.operadorEditText)
+            val selectedDate2 = findViewById<EditText>(R.id.economicoDateEditText2).text.toString()
 
-
-
-
-                val url = "http://${conexion.ip}/basechrono/consultaSegunda.php?economico=$economico&fecha_revision=$selectedDate"
+                val url = "http://${conexion.ip}/basechrono/consultaSegunda.php?economico=$economico&fecha_revision=$selectedDate&operador=$operadorEditText&fecha_revision2=$selectedDate2"
                // val queue = Volley.newRequestQueue(this)
 
                 val jsonArrayRequest = JsonArrayRequest(
