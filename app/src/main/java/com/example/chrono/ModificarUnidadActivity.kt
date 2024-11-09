@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
@@ -123,9 +124,53 @@ class ModificarUnidadActivity : AppCompatActivity() {
             queue.add(JsonObjectRequest)
         }
 
+        // Función para realizar la eliminación de la unidad
+        fun eliminarUnidad(economico: String) {
+            val queue = Volley.newRequestQueue(this)
+            val url = "http://${conexion.ip}/basechrono/borrarUnidad.php"
+
+            val postRequest = object : StringRequest(
+                Method.POST, url,
+                Response.Listener<String> { response ->
+                    Toast.makeText(this, "$response", Toast.LENGTH_LONG).show()
+                },
+                Response.ErrorListener { error ->
+                    Toast.makeText(this, "Ocurrió un error inesperado", Toast.LENGTH_LONG).show()
+                }
+            ) {
+                override fun getParams(): MutableMap<String, String> {
+                    val params = HashMap<String, String>()
+                    params["economico"] = economico
+                    return params
+                }
+            }
+            queue.add(postRequest)
+        }
+
+        fun mostrarAlertaDeEliminacion(economico: String) {
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Confirmar Eliminación")
+            builder.setMessage("¿Estás seguro de que deseas eliminar esta unidad? Esta acción no se puede deshacer.")
+
+            builder.setPositiveButton("Eliminar") { dialog, _ ->
+                eliminarUnidad(economico) // Llama a la función que elimina el dato
+                dialog.dismiss()
+            }
+
+            builder.setNegativeButton("Cancelar") { dialog, _ ->
+                dialog.dismiss() // Cierra el cuadro de alerta sin hacer nada
+            }
+
+            val alertDialog = builder.create()
+            alertDialog.show()
+        }
+
+
+
+// En el botón de eliminar
         btnEliminar.setOnClickListener {
             val economico = editEconomico.text.toString()
-            val placas = editEconomico.text.toString()
+            val placas = editPlacas.text.toString() // Corrige el campo de placas
             var estatus = spinnerEstatus.selectedItem.toString()
 
             if (estatus == "Activo") {
@@ -133,28 +178,14 @@ class ModificarUnidadActivity : AppCompatActivity() {
             } else {
                 estatus = "I"
             }
+
             if (economico.isEmpty() || placas.isEmpty()) {
                 Toast.makeText(this, "Por favor, complete todos los campos", Toast.LENGTH_LONG).show()
                 return@setOnClickListener
             }
 
-            val queue = Volley.newRequestQueue(this)
-            val url = "http://${conexion.ip}/basechrono/borrarUnidad.php"
-            var postRequest = object : StringRequest(
-                Method.POST, url,
-                Response.Listener<String> { response ->
-                    Toast.makeText(this, "$response", Toast.LENGTH_LONG).show()
-                }, Response.ErrorListener
-                { error ->
-                    Toast.makeText(this, "Ocurrio un error inesperado", Toast.LENGTH_LONG).show()
-                }){
-                override fun getParams(): MutableMap<String, String> {
-                    val params = HashMap<String, String>()
-                    params.put("economico", economico)
-                    return params
-                }
-            }
-            queue.add(postRequest)
+            // Llama a la función para mostrar la alerta de eliminación con confirmación
+            mostrarAlertaDeEliminacion(economico)
         }
     }
 }

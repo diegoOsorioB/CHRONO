@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
                             val id = response.getString("id_usuario")
                             val rol = response.getString("rol")
 
-                            if (contra == password && user == username) {
+                            if (contra == password && user == username.trim()) {
                                 if (rol == "G") {
                                     val intent =
                                         Intent(this, MenuPrincipalGuardiaActivity::class.java)
@@ -77,6 +77,9 @@ class MainActivity : AppCompatActivity() {
                                     intent.putExtra("id", id)
                                     startActivity(intent)
                                 }
+                                Toast.makeText(this, "$id Bienvenido $username", Toast.LENGTH_SHORT).show()
+                                usernameEditText.text.clear()
+                                passwordEditText.text.clear()
                             } else {
                                 Toast.makeText(
                                     this,
@@ -89,7 +92,7 @@ class MainActivity : AppCompatActivity() {
                     },
                     { error ->
                         println("Error: $error")
-                        Toast.makeText(this, "$error", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "Ocurrio un error inesperado", Toast.LENGTH_SHORT).show()
                     })
 
                 queue.add(JsonObjectRequest)

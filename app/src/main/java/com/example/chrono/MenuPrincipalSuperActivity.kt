@@ -32,6 +32,7 @@ class MenuPrincipalSuperActivity: AppCompatActivity() {
         // Evento click para Primera Revisión
         primeraRevisionButton.setOnClickListener {
             val intent = Intent(this, FormActivity::class.java)
+            intent.putExtra("id", id)
             startActivity(intent)
         }
 

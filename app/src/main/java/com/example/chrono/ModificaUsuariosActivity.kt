@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
@@ -169,41 +170,78 @@ class ModificaUsuariosActivity : AppCompatActivity() {
             queue.add(JsonObjectRequest)
         }
 
-        btnEliminar.setOnClickListener {
-            val usuario = editUsuario.text.toString()
 
-            if ( usuario.isEmpty() ) {
-                Toast.makeText(this, "Por favor, complete todos los campos", Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
+        // Función para limpiar los campos del formulario
+        fun limpiarCampos() {
+            editUsuario.setText("")
+            editContrasena.setText("")
+            editApellidoP.setText("")
+            editNombre.setText("")
+            spinnerEstatus.setSelection(0)
+        }
 
+        // Función para realizar la eliminación del usuario
+        fun borrarUsuario(usuario: String) {
             val queue = Volley.newRequestQueue(this)
             val url = "http://${conexion.ip}/basechrono/borrarUsuario.php"
-            var postRequest = object : StringRequest(
+
+            val postRequest = object : StringRequest(
                 Method.POST, url,
                 Response.Listener<String> { response ->
                     Toast.makeText(this, "$response", Toast.LENGTH_LONG).show()
-                    editUsuario.setText("")
-                    editContrasena.setText("")
-                    editApellidoP.setText("")
-                    editNombre.setText("")
-                    spinnerEstatus.setSelection(0)
-                }, Response.ErrorListener
-                { error ->
-                    Toast.makeText(this, "Ocurrio un error inesperado", Toast.LENGTH_LONG).show()
-                    editUsuario.setText("")
-                    editContrasena.setText("")
-                    editApellidoP.setText("")
-                    editNombre.setText("")
-                    spinnerEstatus.setSelection(0)
-                }){
+                    // Limpia los campos después de la eliminación exitosa
+                    limpiarCampos()
+                },
+                Response.ErrorListener { error ->
+                    Toast.makeText(this, "Ocurrió un error inesperado", Toast.LENGTH_LONG).show()
+                    // Limpia los campos en caso de error también
+                    limpiarCampos()
+                }
+            ) {
                 override fun getParams(): MutableMap<String, String> {
                     val params = HashMap<String, String>()
-                    params.put("usuario", usuario)
+                    params["usuario"] = usuario
                     return params
                 }
             }
             queue.add(postRequest)
         }
+
+
+
+        // Función para mostrar un cuadro de alerta de confirmación antes de eliminar
+        fun mostrarAlertaDeEliminacion(usuario: String) {
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Confirmar Eliminación")
+            builder.setMessage("¿Estás seguro de que deseas eliminar al usuario $usuario? Esta acción no se puede deshacer.")
+
+            builder.setPositiveButton("Eliminar") { dialog, _ ->
+                borrarUsuario(usuario) // Llama a la función que realiza la eliminación
+                dialog.dismiss()
+            }
+
+            builder.setNegativeButton("Cancelar") { dialog, _ ->
+                dialog.dismiss() // Cierra el cuadro de alerta sin hacer nada
+            }
+
+            val alertDialog = builder.create()
+            alertDialog.show()
+        }
+
+
+
+// En el botón de eliminar
+        btnEliminar.setOnClickListener {
+            val usuario = editUsuario.text.toString()
+
+            if (usuario.isEmpty()) {
+                Toast.makeText(this, "Por favor, complete todos los campos", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
+            // Llama a la función para mostrar la alerta de confirmación de eliminación
+            mostrarAlertaDeEliminacion(usuario)
+        }
+
     }
 }

@@ -97,111 +97,124 @@ class BusquedaActivity : AppCompatActivity() {
              val operadorEditText = findViewById<EditText>(R.id.operadorEditText)
             val selectedDate2 = findViewById<EditText>(R.id.economicoDateEditText2).text.toString()
 
-                val url = "http://${conexion.ip}/basechrono/consultaSegunda.php?economico=$economico&fecha_revision=$selectedDate&operador=$operadorEditText&fecha_revision2=$selectedDate2"
-               // val queue = Volley.newRequestQueue(this)
+            if (selectedDate.isNotEmpty() && selectedDate2.isNotEmpty() && selectedDate2<selectedDate){
+                Toast.makeText(this, "Revisa el rango de fechas", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
 
-                val jsonArrayRequest = JsonArrayRequest(
+            val operador = operadorEditText.text.toString() // Obtener el valor de texto de operador
+            val url = "http://${conexion.ip}/basechrono/consultaSegunda.php?economico=$economico&fecha_revision=$selectedDate&operador=$operador&fecha_limite=$selectedDate2"
+
+            val jsonArrayRequest = JsonArrayRequest(
                     Request.Method.GET, url, null,
                     { response ->
                         try {
-                            if (response is JSONArray) {
-                                // Limpia la tabla excepto el encabezado
-                                resultTableLayout.removeViews(1, resultTableLayout.childCount - 1)
+                           if (response is JSONArray) {
+                                    // Limpia la tabla excepto el encabezado
+                                    resultTableLayout.removeViews(
+                                        1,
+                                        resultTableLayout.childCount - 1
+                                    )
 
-                                // Limitar la cantidad de registros mostrados a 4
-                                val totalRecordsToShow = minOf(response.length(), 4)
+                                    // Limitar la cantidad de registros mostrados a 4
+                                    val totalRecordsToShow = minOf(response.length(), 4)
 
-                                // Recorrer el JSONArray y agregar cada fila a la tabla
-                                for (i in 0 until totalRecordsToShow) {
-                                    val item = response.getJSONObject(i)
-                                    val revisionID = item.getString("id_revision")
-                                    val economico = item.getString("Economico_Unidad")
-                                    val placas = item.getString("Placas_Unidad")
-                                    val tarimas = item.getString("Tarimas")
-                                    val patin = item.getString("Patin")
-                                    val kilometraje = item.getString("Kilometraje")
-                                    val nocIncho = item.getString("No_Cincho")
-                                    val operador = item.getString("Nombre_Operador")
-                                    val usuario = item.getString("Nombre_Usuario")
-                                    val fechaPrimeraRevision =
-                                        item.getString("Fecha_Primera_Revision")
-                                    val fechaSegundaRevision =
-                                        item.getString("Fecha_Segunda_Revision")
-                                    val apellidoPaternoUsuario = item.getString("Apellido_Usuario")
-                                    val apellidoOperador =
-                                        item.getString("Apellido_Paterno_Operador")
-                                    val apellidoMaternoOperador =
-                                        item.getString("Apellido_Materno_Operador")
+                                    // Recorrer el JSONArray y agregar cada fila a la tabla
+                                    for (i in 0 until totalRecordsToShow) {
+                                        val item = response.getJSONObject(i)
+                                        val revisionID = item.getString("id_revision")
+                                        val economico = item.getString("Economico_Unidad")
+                                        val placas = item.getString("Placas_Unidad")
+                                        val tarimas = item.getString("Tarimas")
+                                        val patin = item.getString("Patin")
+                                        val kilometraje = item.getString("Kilometraje")
+                                        val nocIncho = item.getString("No_Cincho")
+                                        val operador = item.getString("Nombre_Operador")
+                                        val usuario = item.getString("Nombre_Usuario")
+                                        val fechaPrimeraRevision =
+                                            item.getString("Fecha_Primera_Revision")
+                                        val fechaSegundaRevision =
+                                            item.getString("Fecha_Segunda_Revision")
+                                        val apellidoPaternoUsuario =
+                                            item.getString("Apellido_Usuario")
+                                        val apellidoOperador =
+                                            item.getString("Apellido_Paterno_Operador")
+                                        val apellidoMaternoOperador =
+                                            item.getString("Apellido_Materno_Operador")
 
-                                    // Crear una nueva fila para la tabla
-                                    val tableRow = TableRow(this)
+                                        // Crear una nueva fila para la tabla
+                                        val tableRow = TableRow(this)
 
-                                    // Mostrar solo 4 datos principales
-                                    val economicoCell = TextView(this).apply {
-                                        text = revisionID
-                                        setPadding(8, 8, 8, 8)
-                                    }
-
-                                    val placasCell = TextView(this).apply {
-                                        text = economico
-                                        setPadding(8, 8, 8, 8)
-                                    }
-
-                                    val kilometrajeCell = TextView(this).apply {
-                                        text = operador
-                                        setPadding(8, 8, 8, 8)
-                                    }
-
-
-
-                                    // Crear botón de detalles
-                                    val detailsButton = Button(this).apply {
-                                        text = "Detalles"
-                                        setPadding(8, 8, 8, 8)
-                                        setOnClickListener {
-                                            // Mostrar información adicional en un diálogo
-                                            AlertDialog.Builder(this@BusquedaActivity)
-                                                .setTitle("Detalles de la revisión")
-                                                .setMessage(
-                                                            "ID de Revisión: $revisionID\n" +
-                                                            "Economico: $economico\n" +
-                                                            "Placas: $placas\n" +
-                                                            "Tarimas: $tarimas\n" +
-                                                            "Patin: $patin\n" +
-                                                            "Kilometraje: $kilometraje\n" +
-                                                            "Cincho: $nocIncho\n" +
-                                                            "Operador: $operador $apellidoOperador $apellidoMaternoOperador\n" +
-                                                            "Usuario: $usuario $apellidoPaternoUsuario\n" +
-                                                            "Fecha 1ª Revisión: $fechaPrimeraRevision\n" +
-                                                            "Fecha 2ª Revisión: $fechaSegundaRevision"
-                                                )
-                                                .setPositiveButton("Cerrar") { dialog, _ ->
-                                                    dialog.dismiss()
-                                                }
-                                                .show()
+                                        // Mostrar solo 4 datos principales
+                                        val economicoCell = TextView(this).apply {
+                                            text = revisionID
+                                            setPadding(8, 8, 8, 8)
                                         }
+
+                                        val placasCell = TextView(this).apply {
+                                            text = economico
+                                            setPadding(8, 8, 8, 8)
+                                        }
+
+                                        val kilometrajeCell = TextView(this).apply {
+                                            text = operador
+                                            setPadding(8, 8, 8, 8)
+                                        }
+
+
+                                        // Crear botón de detalles
+                                        val detailsButton = Button(this).apply {
+                                            text = "Detalles"
+                                            setPadding(8, 8, 8, 8)
+                                            setOnClickListener {
+                                                // Mostrar información adicional en un diálogo
+                                                AlertDialog.Builder(this@BusquedaActivity)
+                                                    .setTitle("Detalles de la revisión")
+                                                    .setMessage(
+                                                        "ID de Revisión: $revisionID\n" +
+                                                                "Economico: $economico\n" +
+                                                                "Placas: $placas\n" +
+                                                                "Tarimas: $tarimas\n" +
+                                                                "Patin: $patin\n" +
+                                                                "Kilometraje: $kilometraje\n" +
+                                                                "Cincho: $nocIncho\n" +
+                                                                "Operador: $operador $apellidoOperador $apellidoMaternoOperador\n" +
+                                                                "Usuario: $usuario $apellidoPaternoUsuario\n" +
+                                                                "Fecha 1ª Revisión: $fechaPrimeraRevision\n" +
+                                                                "Fecha 2ª Revisión: $fechaSegundaRevision"
+                                                    )
+                                                    .setPositiveButton("Cerrar") { dialog, _ ->
+                                                        dialog.dismiss()
+                                                    }
+                                                    .show()
+                                            }
+                                        }
+
+                                        // Agregar las celdas a la fila
+                                        tableRow.addView(economicoCell)
+                                        tableRow.addView(placasCell)
+                                        tableRow.addView(kilometrajeCell)
+                                        tableRow.addView(detailsButton)
+
+                                        // Agregar la fila a la tabla
+                                        resultTableLayout.addView(tableRow)
                                     }
-
-                                    // Agregar las celdas a la fila
-                                    tableRow.addView(economicoCell)
-                                    tableRow.addView(placasCell)
-                                    tableRow.addView(kilometrajeCell)
-                                    tableRow.addView(detailsButton)
-
-                                    // Agregar la fila a la tabla
-                                    resultTableLayout.addView(tableRow)
-                                }
-                            }else {
-                                // Si la respuesta no es un JSONArray, manejarlo como un JSONObject
-                                val jsonObject = response as JSONObject
-                                if (jsonObject.has("error")) {
-                                    // Mostrar mensaje de error si existe
-                                    val errorMessage = jsonObject.getString("error")
-                                    Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
                                 } else {
-                                    Toast.makeText(this, "Respuesta inesperada del servidor.", Toast.LENGTH_LONG).show()
+                                    // Si la respuesta no es un JSONArray, manejarlo como un JSONObject
+                                    val jsonObject = response as JSONObject
+                                    if (jsonObject.has("error")) {
+                                        // Mostrar mensaje de error si existe
+                                        val errorMessage = jsonObject.getString("error")
+                                        Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
+                                    } else {
+                                        Toast.makeText(
+                                            this,
+                                            "Respuesta inesperada del servidor.",
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                    }
                                 }
-                            }
+
                         } catch (e: Exception) {
                             e.printStackTrace()
                             Toast.makeText(this, "Error al procesar los datos", Toast.LENGTH_LONG).show()
@@ -209,8 +222,10 @@ class BusquedaActivity : AppCompatActivity() {
                         }
                     },
                     { error ->
-                        Toast.makeText(this, "Error: ${error.message}", Toast.LENGTH_LONG).show()
-                        economicoEditText.setText("$error")
+
+                        Toast.makeText(this, "Error: No se encontraron datos", Toast.LENGTH_LONG).show()
+
+
                     }
                 )
 
@@ -223,6 +238,11 @@ class BusquedaActivity : AppCompatActivity() {
         generarExcelButton.setOnClickListener {
             if (isExternalStorageWritable()) {
                 try {
+                    if (resultTableLayout.childCount <= 1) {
+                        Toast.makeText(this, "No hay datos para generar el archivo Excel", Toast.LENGTH_SHORT).show()
+                        return@setOnClickListener
+                    }
+
                     // Crear un archivo Excel
                     val workbook: Workbook = XSSFWorkbook()
                     val sheet: Sheet = workbook.createSheet("Revisiones")

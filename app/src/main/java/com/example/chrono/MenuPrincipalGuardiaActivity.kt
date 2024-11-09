@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.chrononote.BusquedaActivity
 //import com.example.chrononote.BusquedaActivity
 import com.example.chrononote.SegundaRevActivity
 
@@ -37,7 +38,7 @@ class MenuPrincipalGuardiaActivity: AppCompatActivity() {
 
         // Evento click para Consulta
         consultaButton.setOnClickListener {
-         //   val intent = Intent(this, BusquedaActivity::class.java)
+           val intent = Intent(this, BusquedaActivity::class.java)
             startActivity(intent)
         }
 

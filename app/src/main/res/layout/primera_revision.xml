@@ -35,59 +35,38 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.6" />
 
-    <TextView
-        android:id="@+id/placasLabel"
-        android:layout_width="96dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="60dp"
-        android:text="Placas"
-        android:textColor="#C4A484"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/economicoLabel" />
-
     <!-- Campo de texto Tarimas -->
 
     <!-- Campo de texto Patín -->
-
-    <EditText
-        android:id="@+id/placasEditText"
-        android:layout_width="187dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="16dp"
-        android:inputType="text"
-        app:layout_constraintStart_toEndOf="@id/placasLabel"
-        app:layout_constraintTop_toBottomOf="@+id/economicoEditText"
-        app:layout_constraintWidth_percent="0.6" />
-
-    <TextView
-        android:id="@+id/tarimasLabel"
-        android:layout_width="99dp"
-        android:layout_height="27dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="60dp"
-        android:text="Tarimas"
-        android:textColor="#C4A484"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/placasLabel" />
 
     <!-- Campo de texto Operador -->
 
     <!-- Campo de texto Gasolina -->
 
+    <TextView
+        android:id="@+id/tarimasLabel"
+        android:layout_width="99dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
+        android:text="Tarimas"
+        android:textColor="#C4A484"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/economicoLabel" />
+
     <EditText
         android:id="@+id/tarimasEditText"
         android:layout_width="187dp"
         android:layout_height="43dp"
-        android:layout_marginTop="12dp"
-        android:inputType="text"
+        android:layout_marginTop="20dp"
+        android:inputType="number"
+        android:digits="01"
+        android:maxLength="1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintHorizontal_bias="0.445"
         app:layout_constraintStart_toEndOf="@id/tarimasLabel"
-        app:layout_constraintTop_toBottomOf="@+id/placasEditText"
+        app:layout_constraintTop_toBottomOf="@+id/economicoEditText"
         app:layout_constraintWidth_percent="0.6" />
 
     <TextView
@@ -108,7 +87,9 @@
         android:layout_height="43dp"
         android:layout_marginStart="44dp"
         android:layout_marginTop="20dp"
-        android:inputType="text"
+        android:inputType="number"
+        android:digits="01"
+        android:maxLength="2"
         app:layout_constraintStart_toEndOf="@id/patinLabel"
         app:layout_constraintTop_toBottomOf="@+id/tarimasEditText"
         app:layout_constraintWidth_percent="0.6" />
@@ -142,23 +123,24 @@
 
     <Button
         android:id="@+id/guardarButton"
-        android:layout_width="158dp"
-        android:layout_height="45dp"
+        android:layout_width="256dp"
+        android:layout_height="46dp"
         android:layout_marginTop="140dp"
         android:layout_marginEnd="16dp"
         android:text="Guardar"
-        app:layout_constraintEnd_toStartOf="@+id/cancelarButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.575"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/operadorLabel" />
 
     <Button
         android:id="@+id/cancelarButton"
-        android:layout_width="141dp"
+        android:layout_width="260dp"
         android:layout_height="49dp"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="44dp"
         android:text="Cancelar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/guardarButton"
-        app:layout_constraintTop_toBottomOf="@+id/operadorEditText" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guardarButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

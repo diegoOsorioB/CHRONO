@@ -7,6 +7,7 @@ import android.widget.EditText
 import android.widget.Spinner
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
@@ -152,19 +153,11 @@ class ModificaOperadorActivity : AppCompatActivity() {
             queue.add(jsonObjectRequest)
         }
 
-
-
-        btnEliminar.setOnClickListener {
-            val noOperador = editNoOperador.text.toString()
-
-
-            if (noOperador.isEmpty() ) {
-                Toast.makeText(this, "Por favor, complete todos los campos", Toast.LENGTH_LONG).show()
-                return@setOnClickListener
-            }
+        fun eliminarOperador(noOperador: String) {
             val queue = Volley.newRequestQueue(this)
-            val url = "http://${conexion.ip}/basechrono/consultaOperador.php"
-            var postRequest = object : StringRequest(
+            val url = "http://${conexion.ip}/basechrono/borrarOperadores.php" // Cambia la URL al endpoint de eliminación
+
+            val postRequest = object : StringRequest(
                 Method.POST, url,
                 Response.Listener<String> { response ->
                     try {
@@ -172,7 +165,6 @@ class ModificaOperadorActivity : AppCompatActivity() {
 
                         if (jsonResponse.has("mensaje")) {
                             val mensaje = jsonResponse.getString("mensaje")
-
                             Toast.makeText(this, mensaje, Toast.LENGTH_LONG).show()
                         }
 
@@ -180,17 +172,51 @@ class ModificaOperadorActivity : AppCompatActivity() {
                         e.printStackTrace()
                         Toast.makeText(this, "Error al recibir la respuesta", Toast.LENGTH_LONG).show()
                     }
-                }, Response.ErrorListener
-                { error ->
-                    Toast.makeText(this, "Ocurrio un error inesperado", Toast.LENGTH_LONG).show()
-                }){
+                },
+                Response.ErrorListener { error ->
+                    Toast.makeText(this, "Ocurrió un error inesperado", Toast.LENGTH_LONG).show()
+                }
+            ) {
                 override fun getParams(): MutableMap<String, String> {
                     val params = HashMap<String, String>()
-                    params.put("no_operador", noOperador)
+                    params["no_operador"] = noOperador
                     return params
                 }
             }
             queue.add(postRequest)
         }
+
+        // Función para mostrar un cuadro de alerta de confirmación antes de eliminar
+        fun mostrarAlertaDeEliminacion(noOperador: String) {
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle("Confirmar Eliminación")
+            builder.setMessage("¿Estás seguro de que deseas eliminar al operador $noOperador? Esta acción no se puede deshacer.")
+
+            builder.setPositiveButton("Eliminar") { dialog, _ ->
+                eliminarOperador(noOperador) // Llama a la función que realiza la eliminación
+                dialog.dismiss()
+            }
+
+            builder.setNegativeButton("Cancelar") { dialog, _ ->
+                dialog.dismiss() // Cierra el cuadro de alerta sin hacer nada
+            }
+
+            val alertDialog = builder.create()
+            alertDialog.show()
+        }
+
+
+        btnEliminar.setOnClickListener {
+            val noOperador = editNoOperador.text.toString()
+
+            if (noOperador.isEmpty()) {
+                Toast.makeText(this, "Por favor, complete todos los campos", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
+            // Llama a la función para mostrar la alerta de confirmación de eliminación
+            mostrarAlertaDeEliminacion(noOperador)
+        }
+
     }
 }
