@@ -39,9 +39,20 @@ class SegundaRevActivity : AppCompatActivity() {
             val id = intent.getStringExtra("id")
             val url = "http://${conexion.ip}/basechrono/consultaPrimera.php?economico=$economico"
 
+            if (economico.isEmpty()) {
+                Toast.makeText(this, "Por favor, ingrese un valor en el campo 'Economico'", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
             val JsonObjectRequest = JsonObjectRequest(
                 Request.Method.GET, url,null,
                 { response ->
+                    if (response.has("mensaje")) {
+                        // Mostrar el mensaje de error en un Toast
+                        val mensaje = response.getString("mensaje")
+                        Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show()
+
+                    } else {
                     economicoEditText.setText(response.getString("economico"))
                    // placasEditText.setText(response.getString("placas"))
                     tarimasEditText.setText(response.getString("tarimas"))
@@ -49,10 +60,10 @@ class SegundaRevActivity : AppCompatActivity() {
                     operadorEditText.setText(response.getString("no_operador"))
                     id_revisiaion=response.getString("id_revision")
                     Toast.makeText(this, "$response", Toast.LENGTH_SHORT).show()
-                },
+                }},
                 { error ->
 
-                    Toast.makeText(this, "$error", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "err $error", Toast.LENGTH_SHORT).show()
                 })
 
             queue.add(JsonObjectRequest)
@@ -76,7 +87,7 @@ class SegundaRevActivity : AppCompatActivity() {
             var postRequest = object : StringRequest(
                 Method.POST, url,
                 Response.Listener<String> { response ->
-                    Toast.makeText(this, "id $response", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "$response", Toast.LENGTH_LONG).show()
                 }, Response.ErrorListener
                 { error ->
                     Toast.makeText(this, "Ocurrio un error inesperado", Toast.LENGTH_SHORT).show()

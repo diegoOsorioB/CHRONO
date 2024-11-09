@@ -26,7 +26,6 @@ class FormActivity : AppCompatActivity() {
         }
 
         val economicoEditText = findViewById<EditText>(R.id.economicoEditText)
-        val placasEditText = findViewById<EditText>(R.id.placasEditText)
         val tarimasEditText = findViewById<EditText>(R.id.tarimasEditText)
         val patinEditText = findViewById<EditText>(R.id.patinEditText)
         val operadorEditText = findViewById<EditText>(R.id.operadorEditText)
@@ -38,12 +37,11 @@ class FormActivity : AppCompatActivity() {
         guardarButton.setOnClickListener {
             // Capturar los datos de los campos
             val economico = economicoEditText.text.toString()
-            val placas = placasEditText.text.toString()
             val tarimas = tarimasEditText.text.toString()
             val patin = patinEditText.text.toString()
             val operador = operadorEditText.text.toString()
 
-            if (economico.isEmpty() || placas.isEmpty() || tarimas.isEmpty() || patin.isEmpty() || operador.isEmpty()) {
+            if (economico.isEmpty() || tarimas.isEmpty() || patin.isEmpty() || operador.isEmpty()) {
                 Toast.makeText(this, "Por favor, complete todos los campos", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -56,10 +54,16 @@ class FormActivity : AppCompatActivity() {
             val url = "http://${conexion.ip}/basechrono/insertaPrimera.php"
             var postRequest = object : StringRequest(Method.POST, url,
                 Response.Listener<String> { response ->
-                    Toast.makeText(this, " $id_usuario $response", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "$id_usuario $response", Toast.LENGTH_SHORT).show()
+                    economicoEditText.text.clear()
+                    tarimasEditText.text.clear()
+                    patinEditText.text.clear()
+                    operadorEditText.text.clear()
+
                 }, Response.ErrorListener
                 { error ->
-                    Toast.makeText(this, "$error", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Ocurrio un error al guardar", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Revise que sus datos de entrada sean correctos", Toast.LENGTH_LONG).show()
                 }){
                 override fun getParams(): MutableMap<String, String> {
                     val params = HashMap<String, String>()
@@ -78,7 +82,6 @@ class FormActivity : AppCompatActivity() {
         cancelarButton.setOnClickListener {
             // Lógica de cancelar o limpiar campos
             economicoEditText.text.clear()
-            placasEditText.text.clear()
             tarimasEditText.text.clear()
             patinEditText.text.clear()
             operadorEditText.text.clear()

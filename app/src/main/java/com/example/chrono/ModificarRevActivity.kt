@@ -44,6 +44,10 @@ class ModificarRevActivity: AppCompatActivity() {
 
             // Lógica para buscar información basada en el campo "Economico"
             val economico = etBuscarEconomico.text.toString()
+            if (economico.isEmpty()) {
+                Toast.makeText(this, "Por favor, ingrese un valor en el campo 'Economico'", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
             val queue = Volley.newRequestQueue(this)
             val id = intent.getStringExtra("id")
             val url = "http://${conexion.ip}/basechrono/consultaSR.php?economico=$economico"
@@ -63,7 +67,6 @@ class ModificarRevActivity: AppCompatActivity() {
                         etKilometraje.setText(response.getString("Kilometraje"))
                         etNoCincho.setText(response.getString("No_Cincho"))
                         idRevision = response.getString("id_revision")
-                        Toast.makeText(this, "$response", Toast.LENGTH_SHORT).show()
                     }
                 },
                 { error ->
@@ -95,8 +98,8 @@ class ModificarRevActivity: AppCompatActivity() {
                 Method.POST, url,
                 Response.Listener<String> { response ->
 
-                //    val mensaje=response.getString("mensaje")
-                    Toast.makeText(this, "${response}", Toast.LENGTH_LONG).show()
+
+                    Toast.makeText(this, "$response", Toast.LENGTH_LONG).show()
                 }, Response.ErrorListener
                 { error ->
                     Toast.makeText(this, "Ocurrio un error inesperado", Toast.LENGTH_SHORT).show()
